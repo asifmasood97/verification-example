@@ -24,9 +24,8 @@
 		}
 	</style>
 	<script>
-		const baseUrl = "http://localhost:7100"
-		const key = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjcwNzEiLCJpYXQiOjE2MjAwNDg1MjEsIm5hbWUiOiJ0ZXN0dGVzdCIsInVybCI6Ind3dy5leGFtcGxlLmNvbSIsImVtYWlsIjoiM0g1aFNGNG1mYnd4TzhHZXVmNjREOUl3aFJhQ0tJa3dMaEVxRGE2dzFfZ1dhRjFWa3VuaDlHczRuQUpBWDI1dV9YdXk2U0xNdy1JUmtTWHBFamJEZjJkcExYbDRNM0JyTlhCRGRVRWlMQ0p1YjNScFpua2lPaUlpZlEiLCJjYXJkIjp7ImFjcXVpcmVyIjoiakVkUXk0aXZOTVY0NTBfbHpJOGNnbEZjYWgwTF83cDVpbUtjZlowcU5nVmZqUmRvejRpWjl1WldjNTZyTUloTXNsVGQwQkQ4cG0xZHdmTVkzRmljcXlKd2NtOTBiMk52YkNJNkltbHVkR1Z5WjJseWJ5SXNJblZ5YkNJNkltaDBkSEE2THk5c2IyTmhiR2h2YzNRNk56RXdNQ0o5IiwiY291bnRyeSI6IlNFIiwiZGVzY3JpcHRvciI6InRlc3QgdHJhbnNhY3Rpb24iLCJlbXYzZCI6Ikw2NVNBVVEyOHV3YVBKdGlaclAxU000Skk2b29Fd1pfRWN5VURqNDBDQW11RDdoS01mT1RMWHlVMDJ0c3F0dDRQczhkemIyRmNaVElaX2VJeWhGUjFTSXNJblZ5YkNJNkltaDBkSEJ6T2k4dmMyVnlkbWxqWlM1ellXNWtZbTk0TGpOa2MyVmpkWEpsTG1sdkluMHNleUp3Y205MGIyTnZiQ0k2SW1Ob00yUXhJaXdpZFhKc0lqb2lhSFIwY0hNNkx5OWhjR2t1WTJGeVpHWjFibU11WTI5dEwyTm9NMlF4YzJsdElpd2lhMlY1SWpvaWJtOHRhMlY1SW4xZCIsImlkIjoidGVzdCIsIm1jYyI6IjEyMzQiLCJtaWQiOiI4MTAzMDAwMTExIiwidXJsIjoiaHR0cDovL2xvY2FsaG9zdDo3MTAwIn0sInN1YiI6InRlc3R0ZXN0IiwiYWdlbnQiOiJ0ZXN0dGVzdCIsImF1ZCI6InB1YmxpYyIsImZlYXR1cmVzIjoiIn0.Lc0jmuWdQBnJbMPbm3SfJWrXugZJBap8SDyMA8xWgNE"
-
+		const baseUrl = "https://merchant.intergiro.com/v1"
+		const key = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2FwaS5wYXlmdW5jLmNvbSIsImlhdCI6MTYyMzQyNjE2NSwibmFtZSI6InRlc3R0ZXN0IiwidXJsIjoid3d3LmV4YW1wbGUuY29tIiwiZW1haWwiOiJSTExCNGdOaVBzYk9LYUlEYmgzRGFDYnd4WWlGb3lmeVI4dkU2TnFJQ2NObThKcGhwRWViRkZfSmgzeVhSZjdpU3NJN250dy1mRW5Qeml1WU5NeU82bWRwTFhsNE0zQnJOWEJEZFVFaUxDSnViM1JwWm5raU9pSWlmUSIsImNhcmQiOnsiYWNxdWlyZXIiOiJMczZXbkVLdEtkcW9iY1RQTW9QdlhOanlhNVUwRnpaRWJ4dEpPZlNlQml5c3REYkVlN25DVkhkcEVWcWViWnJJMVp1ODJZN2U4RDF3X2FKclJ2dXdleUp3Y205MGIyTnZiQ0k2SW1sdWRHVnlaMmx5YnlJc0luVnliQ0k2SW1oMGRIQnpPaTh2WVhCcExuQmhlV1oxYm1NdVkyOXRJbjAiLCJjb3VudHJ5IjoiU0UiLCJkZXNjcmlwdG9yIjoidGVzdCB0cmFuc2FjdGlvbiIsImVtdjNkIjoiSWEzOTRhRWJNVTdrdVJIdDRxNlUzZGd0dzIzZmg4UFRPTXpiRjF4c0xPWW1aR3FHUTJtdl9rdXdBWllMSmltX1pwakc0UjdWRVpva0pwamhXOGdleGlJc0luVnliQ0k2SW1oMGRIQnpPaTh2YzJWeWRtbGpaUzV6WVc1a1ltOTRMak5rYzJWamRYSmxMbWx2SW4wc2V5SndjbTkwYjJOdmJDSTZJbU5vTTJReElpd2lkWEpzSWpvaWFIUjBjSE02THk5aGNHa3VZMkZ5WkdaMWJtTXVZMjl0TDJOb00yUXhjMmx0SWl3aWEyVjVJam9pYm04dGEyVjVJbjFkIiwiaWQiOiJ0ZXN0IiwibWNjIjoiMTIzNCIsIm1pZCI6IjgxMDMwMDAxMTEiLCJ1cmwiOiJodHRwczovL2FwaS5wYXlmdW5jLmNvbSJ9LCJzdWIiOiJ0ZXN0dGVzdCIsImFnZW50IjoidGVzdCIsImF1ZCI6InB1YmxpYyIsImZlYXR1cmVzIjoiIn0.0FLx7wI4f0r7Rmi6g5ALeR38p8dJ307A9TZJ6-C2iAw"
 		let authorization
 		function submit() {
 			authorization = {
@@ -55,10 +54,10 @@
 					if (body.error == "verification required")
 						verify(authorization)
 					else
-						alert("failed: " + JSON.stringify(body))
+						alert("failed3: " + JSON.stringify(body))
 					break
 				default:
-					alert("failed: " + JSON.stringify(body))
+					alert("failed4: " + JSON.stringify(body))
 					break
 			}
 		}
@@ -68,38 +67,39 @@
 				number: authorization.number,
 				currency: authorization.currency,
 				card: authorization.card,
-				target: baseUrl+"/verification/test"
-				//browser: { parent: window.location.origin }
+				target: "http://127.0.0.1:7112/verification/test"
+				// target: "http://ptsv2.com/t/dvcka-1634138599/post"
+				// browser: { parent: window.location.origin }
 			})
 
-			const iframe = document.getElementById("verification")
+			const iframe = document.getElementById("thisistest")
 			switch (status) {
 				case 201:
 					authorization.card.verification = body
-					iframe.classList.remove("visible")
-					iframe.classList.add("hidden")
 					await authorize()
 					break
 				case 400:
 					if (body.error == "verification required" && body.content.details.method == "GET") {
-						iframe.classList.replace("hidden", body.content.details.visible ? "visible" : "hidden")
+						console.log("berfore")
+						console.log("this is ulr: ", body.content.details.url)
 						iframe.src = body.content.details.url
+						console.log("after")
 					} else
-						alert("failed: " + JSON.stringify(body))
+						alert("failed1: " + JSON.stringify(body))
 					break
 				default:
-					alert("failed: " + JSON.stringify(body))
+					alert("failed2: " + JSON.stringify(body))
 					break
 			}
 		}
-		window.addEventListener("message", async e => {
-			if (e.data.destination == "parent" && e.data.content.name == "card") {
-				const iframe = document.getElementById("verification")
-				iframe.class = "hidden"
-				authorization.card.verification = JSON.parse(e.data.content.value)
-				await verify()
-			}
-		})
+		// window.addEventListener("message", async e => {
+		// 	if (e.data.destination == "parent" && e.data.content.name == "card") {
+		// 		const iframe = document.getElementById("verification")
+		// 		iframe.class = "hidden"
+		// 		authorization.card.verification = JSON.parse(e.data.content.value)
+		// 		await verify()
+		// 	}
+		// })
 		async function post(url, key, body) {
 			const response = await fetch(url, {
 				method: "POST",
@@ -118,6 +118,7 @@
 
 <body style="width: 100%; max-width: 20em; margin-left: auto; margin-right: auto;">
 	<iframe id="verification"></iframe>
+	<iframe id="thisistest"></iframe>
 	<form method="post">
 		<label for="pan">PAN</label>
 		<input type="text" id="pan" name="pan" value="4111111111111111" />
