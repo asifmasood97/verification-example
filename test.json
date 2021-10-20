@@ -1,0 +1,14 @@
+{
+    "number": "Number",
+    "card": {
+        "pan": "4111111111111111",
+        "expires": [
+            2,
+            22
+        ],
+        "csc": "987"
+    },
+    "currency": "EUR",
+    "items": 250,
+    "target": "https://ptsv2.com/t/el9s9-1634228443/post"
+}

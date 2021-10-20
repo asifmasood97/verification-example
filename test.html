@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title></title>
+</head>
+
+<body>
+	<script type="text/javascript">
+		const input = document.getElementById("result")
+		input.value = { "type": "challenge", "data": { "acsTransID": "0396703a-49d3-4667-af61-11b30ec627ce", "challengeCompletionInd": "Y", "messageType": "CRes", "messageVersion": "2.2.0", "threeDSServerTransID": "1e5ca91c-29a1-4770-b045-dba0053f30fd", "transStatus": "Y" } }
+		const form = document.getElementById("returnForm")
+		form.submit()
+	</script>
+	<form method="post" id="returnForm" action="http://localhost:7100" target="_self">
+		<input type="hidden" id="verification" name="verification"></input>
+	</form>
+
+</body>
+
+</html>

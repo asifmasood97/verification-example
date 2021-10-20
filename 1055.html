@@ -75,29 +75,35 @@
 </head>
 <script>
 	const baseUrl = "http://localhost:7100";
-	let verificationCreatable = {
-		"number": "Number",
-		"card": {
-			"pan": "4111111111111111",
-			"expires": [
-				2,
-				22
-			],
-			"csc": "987"
-		},
-		"currency": "EUR",
-		"items": 250,
-		// "target": "https://ptsv2.com/t/el9s9-1634228443/post"
-		"browser": {
-			"parent": window.location.origin
-		}
-	};
+	let verificationCreatable = { "number": "Number", "card": { "pan": "4111111111111111", "expires": [2, 22], "csc": "987" }, "currency": "EUR", "items": 250, "target": "https://ptsv2.com/t/el9s9-1634228443/post" };
 	let authorizationCreatable = { "number": "Number", "amount": 250, "currency": "EUR", "card": { "pan": "4111111111111111", "expires": [2, 22], "csc": "987" } };
 	const key = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjcwNzEiLCJpYXQiOjE2MjAwNDg1MjEsIm5hbWUiOiJ0ZXN0dGVzdCIsInVybCI6Ind3dy5leGFtcGxlLmNvbSIsImVtYWlsIjoiM0g1aFNGNG1mYnd4TzhHZXVmNjREOUl3aFJhQ0tJa3dMaEVxRGE2dzFfZ1dhRjFWa3VuaDlHczRuQUpBWDI1dV9YdXk2U0xNdy1JUmtTWHBFamJEZjJkcExYbDRNM0JyTlhCRGRVRWlMQ0p1YjNScFpua2lPaUlpZlEiLCJjYXJkIjp7ImFjcXVpcmVyIjoiakVkUXk0aXZOTVY0NTBfbHpJOGNnbEZjYWgwTF83cDVpbUtjZlowcU5nVmZqUmRvejRpWjl1WldjNTZyTUloTXNsVGQwQkQ4cG0xZHdmTVkzRmljcXlKd2NtOTBiMk52YkNJNkltbHVkR1Z5WjJseWJ5SXNJblZ5YkNJNkltaDBkSEE2THk5c2IyTmhiR2h2YzNRNk56RXdNQ0o5IiwiY291bnRyeSI6IlNFIiwiZGVzY3JpcHRvciI6InRlc3QgdHJhbnNhY3Rpb24iLCJlbXYzZCI6Ikw2NVNBVVEyOHV3YVBKdGlaclAxU000Skk2b29Fd1pfRWN5VURqNDBDQW11RDdoS01mT1RMWHlVMDJ0c3F0dDRQczhkemIyRmNaVElaX2VJeWhGUjFTSXNJblZ5YkNJNkltaDBkSEJ6T2k4dmMyVnlkbWxqWlM1ellXNWtZbTk0TGpOa2MyVmpkWEpsTG1sdkluMHNleUp3Y205MGIyTnZiQ0k2SW1Ob00yUXhJaXdpZFhKc0lqb2lhSFIwY0hNNkx5OWhjR2t1WTJGeVpHWjFibU11WTI5dEwyTm9NMlF4YzJsdElpd2lhMlY1SWpvaWJtOHRhMlY1SW4xZCIsImlkIjoidGVzdCIsIm1jYyI6IjEyMzQiLCJtaWQiOiI4MTAzMDAwMTExIiwidXJsIjoiaHR0cDovL2xvY2FsaG9zdDo3MTAwIn0sInN1YiI6InRlc3R0ZXN0IiwiYWdlbnQiOiJ0ZXN0dGVzdCIsImF1ZCI6InB1YmxpYyIsImZlYXR1cmVzIjoiIn0.Lc0jmuWdQBnJbMPbm3SfJWrXugZJBap8SDyMA8xWgNE";
 	authorize()
 
 	async function authorize() {
-		const [status, body] = await post(baseUrl + "/authorization?method=GET", verificationCreatable);
+		const [status, body] = await post(baseUrl + "/authorization", authorizationCreatable);
+		switch (status) {
+			case 200:
+			case 201:
+				// success 
+				submit(body)
+				break;
+			case 400:
+				if (body.error == "verification required") {
+					const verification = body;
+					await verify(verification);
+				} else {
+					// failed
+					submit(body)
+				}
+		}
+	}
+
+
+	async function verify() {
+		const creatable = { ...verificationCreatable, browser: { parent: window.location.origin } }
+		delete creatable.target
+		const [status, body] = await post(baseUrl + "/verification?method=GET", creatable)
 		const iframe = document.getElementById("verification")
 		switch (status) {
 			case 201:
@@ -149,7 +155,7 @@
 			verificationCreatable.card.verification = JSON.parse(e.data.content.value)
 			if (verificationCreatable.card.verification.type == "challenge")
 				document.getElementById("spinner").style.display = "flex"
-			await authorize()
+			await verify()
 		}
 	})
 </script>
