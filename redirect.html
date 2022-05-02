@@ -23,16 +23,16 @@
         "items": 250,
         "currency": "EUR",
         "card": {
-            "pan": "4111111111111111",
+            "pan": "9001100911111111",
             "expires": [
-                2,
-                22
+                3,
+                33
             ],
             "csc": "987"
         },
         "browser": { "parent": window.location.origin }
     }
-    const key = "Bearer <public.api.key>";
+    const key = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2FwaS5wYXlmdW5jLmNvbSIsImlhdCI6MTYyMzQyNTk3MiwibmFtZSI6ImRlbW9kZW1vIiwidXJsIjoid3d3LmV4YW1wbGUuY29tIiwiZW1haWwiOiJPWmlUbXVXS25IZmVMRHoxdVpuT1VWTmJ6SjZiSU03SXZBSG40UlBlVDliZFJNTTU2alNLTnA0bnFYQmFfTTlOUFh3akFGeldsM1ZWcG9NR3djSEc2V2RwTFhsNE0zQnJOWEJEZFVFaUxDSnViM1JwWm5raU9pSWlmUSIsImNhcmQiOnsiYWNxdWlyZXIiOiJfX3Znb2tRc0dfOFR5TllYSmxzN0FldVZvXzN1SjRfU0lZQW41aXBYT3VvSEphZGpiRFh6WDZyQ0tHb3BSRmdLOFpwTmRHRUtNYTByMlZMTTk0cU1FeUp3Y205MGIyTnZiQ0k2SW1sdWRHVnlaMmx5YnlJc0luVnliQ0k2SW1oMGRIQnpPaTh2WVhCcExuQmhlV1oxYm1NdVkyOXRJbjAiLCJjb3VudHJ5IjoiU0UiLCJkZXNjcmlwdG9yIjoiZGVtbyB0cmFuc2FjdGlvbiIsImVtdjNkIjoiYU1Zd1Fjemc5V0FjXzZadFV0VUpoZ1h0ZXpsYXk0SG95NjBlQjFnajdScWhkZllPVlExam5LOXZOYkRJbXlJd21GVmVYSFpCcjZKWkpud3NiYlZjNkNJc0luVnliQ0k2SW1oMGRIQnpPaTh2YzJWeWRtbGpaUzV6WVc1a1ltOTRMak5rYzJWamRYSmxMbWx2SW4wc2V5SndjbTkwYjJOdmJDSTZJbU5vTTJReElpd2lkWEpzSWpvaWFIUjBjSE02THk5aGNHa3VZMkZ5WkdaMWJtTXVZMjl0TDJOb00yUXhjMmx0SWl3aWEyVjVJam9pYm04dGEyVjVJbjFkIiwiaWQiOiJkZW1vIiwibWNjIjoiMTIzNCIsIm1pZCI6IjgxMDMwMDAxMTEiLCJ1cmwiOiJodHRwczovL2FwaS5wYXlmdW5jLmNvbSJ9LCJzdWIiOiJkZW1vZGVtbyIsImFnZW50IjoiZGVtbyIsImF1ZCI6InB1YmxpYyIsImZlYXR1cmVzIjoiIn0.xGN29mcdCZ4_BVrS-eaWrnvKpwhD71X-lLD_KzBsHi0";
     const form = document.getElementById("iframePost")
     form.input.value = JSON.stringify(input)
     form.key.value = key
@@ -40,6 +40,9 @@
 
     window.addEventListener("message", async e => {
         if (e.data.destination == "parent" && e.data.content.name == "authorization") {
+            const element = document.createElement("p")
+            element.textContent = "Done!"
+            document.body.appendChild(element)
             alert(e.data.content.value)
         }
     })
