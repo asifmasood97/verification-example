@@ -40,6 +40,7 @@
 				"csc": document.getElementById("csc").value
 			},
 			browser: { parent: window.location.origin }
+			// "target": "https://ptsv2.com/t/7nlpt-1655286512/post"
 		}
 		authorize()
 	}
@@ -57,9 +58,8 @@
 		}
 	})
 </script>
-
 <body style="width: 100%; max-width: 20em; margin-left: auto; margin-right: auto;">
-	<form method="post" id="iframePost" action="https://merchant.intergiro.com/v1/authorization/redirect"
+	<form method="post" id="iframePost" action="http://localhost:7100/authorization/redirect"
 		target="verification">
 		<input type="hidden" id="input" name="input"></input>
 		<input type="hidden" id="key" name="key"></input>
