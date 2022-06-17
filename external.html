@@ -31,7 +31,8 @@
 		function submit() {
 			authorization = {
 				"id": authorization ? authorization.id : undefined,
-				"number": "Unique-number1",
+				"capture": "auto",
+				"number": "generateUnique",
 				"items": Number(document.getElementById("amount").value),
 				"currency": "EUR",
 				"card": document.getElementById("csc").value ? {
@@ -42,24 +43,26 @@
 					],
 					"csc": document.getElementById("csc").value
 				} : document.getElementById("pan").value.trim(),
-				// browser: { parent: window.location.origin }
-				target: "https://ptsv2.com/t/7nlpt-1655286512/post"
+				browser: { parent: window.location.origin }
+				// target: "http://127.0.0.1:7117/test"
 			}
 			verification = {
 				"number": "Unique-number2",
 				"items": authorization.items,
 				"currency": authorization.currency,
 				"card": {
-					"pan": "9000100111111111",
+					"pan": "4111111111111111",
 					"expires": [3, 33],
 					"csc": "987"
 				},
-				browser: { parent: window.location.origin }
+				browser: { parent: window.location.origin },
+				
 			}
 			authorize(authorization)
 		}
 		async function authorize(creatable) {
 			const [status, body] = await post(baseUrl + "/authorization", document.getElementById("no3dKey").value.trim(), creatable)
+			console.log("body", body)
 			const iframe = document.getElementById("verification")
 			switch (status) {
 				case 201:
@@ -150,7 +153,7 @@
 	<iframe id="verification" class="hidden"></iframe>
 	<form method="post">
 		<label for="pan">PAN</label>
-		<input type="text" id="pan" name="pan" value="9000100111111111" />
+		<input type="text" id="pan" name="pan" value="4111111111111111" />
 		<label for="csc">CSC</label>
 		<input type="text" id="csc" name="csc" value="987" />
 		<label for="expires">Expires</label>
